@@ -1,0 +1,9 @@
+#https://learn.microsoft.com/en-us/powershell/module/dhcpserver/add-dhcpserverv4failover?view=windowsserver2022-ps
+
+Add-DhcpServerv4Failover -ComputerName "dhcpserver.contoso.com" -Name "SFO-SIN-Failover" -PartnerServer "dhcpserver2.contoso.com" -ScopeId 10.10.10.0,10.20.20.0 -ReservePercent 10 -MaxClientLeadTime 2:00:00 -AutoStateTransition $True -StateSwitchInterval 2:00:00
+
+#Confirm Failover Settings
+Get-DhcpServer4Failover
+
+#Replicate scopes to partner server
+Invoke-DhcpServer4FailoverReplication -ScopeId 10.240.22.0,10.240.23.0,10.240.46.0,10.240.62.0,10.240.64.0 -Force
